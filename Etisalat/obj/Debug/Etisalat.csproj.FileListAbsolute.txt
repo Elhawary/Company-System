@@ -1,0 +1,17 @@
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\bin\Debug\Database1.sdf
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\bin\Debug\Etisalat.exe.config
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\bin\Debug\Etisalat.exe
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\bin\Debug\Etisalat.pdb
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\bin\Debug\EntityFramework.dll
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\bin\Debug\EntityFramework.xml
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\obj\Debug\Etisalat.Add_Department.resources
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\obj\Debug\Etisalat.ADD_POSTION.resources
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\obj\Debug\Etisalat.Etisalat_Egypt.resources
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\obj\Debug\Etisalat.addEmployee.resources
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\obj\Debug\Etisalat.Properties.Resources.resources
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\obj\Debug\Etisalat.csproj.GenerateResource.Cache
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\obj\Debug\Etisalat.exe
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\obj\Debug\Etisalat.pdb
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\obj\Debug\Etisalat.Find_Employee.resources
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\obj\Debug\Etisalat.Show.resources
+C:\Users\Bassem\Desktop\Etisalat_Egypt\Etisalat\obj\Debug\Etisalat.csprojResolveAssemblyReference.cache

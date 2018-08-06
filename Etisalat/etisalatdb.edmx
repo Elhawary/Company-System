@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EtisalatModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="EtisalatModelStoreContainer">
+          <EntitySet Name="Department" EntityType="EtisalatModel.Store.Department" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Employees" EntityType="EtisalatModel.Store.Employees" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Postion" EntityType="EtisalatModel.Store.Postion" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__Employees__posti__3F466844" Association="EtisalatModel.Store.FK__Employees__posti__3F466844">
+            <End Role="Postion" EntitySet="Postion" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Postion__departm__3C69FB99" Association="EtisalatModel.Store.FK__Postion__departm__3C69FB99">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Postion" EntitySet="Postion" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="department_id" />
+          </Key>
+          <Property Name="department_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="department_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="employeeID" />
+          </Key>
+          <Property Name="employeeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="employeeName" Type="varchar" MaxLength="255" />
+          <Property Name="employeeAddress" Type="varchar" MaxLength="255" />
+          <Property Name="employeePhone" Type="int" />
+          <Property Name="postion_fk" Type="int" />
+        </EntityType>
+        <EntityType Name="Postion">
+          <Key>
+            <PropertyRef Name="postionID" />
+          </Key>
+          <Property Name="postionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="postionName" Type="varchar" MaxLength="255" />
+          <Property Name="department_fk" Type="int" />
+          <Property Name="salary" Type="int" />
+        </EntityType>
+        <Association Name="FK__Employees__posti__3F466844">
+          <End Role="Postion" Type="EtisalatModel.Store.Postion" Multiplicity="0..1" />
+          <End Role="Employees" Type="EtisalatModel.Store.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postion">
+              <PropertyRef Name="postionID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="postion_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Postion__departm__3C69FB99">
+          <End Role="Department" Type="EtisalatModel.Store.Department" Multiplicity="0..1" />
+          <End Role="Postion" Type="EtisalatModel.Store.Postion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="department_id" />
+            </Principal>
+            <Dependent Role="Postion">
+              <PropertyRef Name="department_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="add_department" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="department_name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="add_employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="address" Type="varchar" Mode="In" />
+          <Parameter Name="phone" Type="int" Mode="In" />
+          <Parameter Name="position_name" Type="varchar" Mode="In" />
+          <Parameter Name="depart_name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="add_position" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="position_name" Type="varchar" Mode="In" />
+          <Parameter Name="department_name" Type="varchar" Mode="In" />
+          <Parameter Name="salary" Type="int" Mode="In" />
+        </Function>
+        <Function Name="find_employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="employeeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="select_department" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="depart_name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="updateEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="empName" Type="varchar" Mode="In" />
+          <Parameter Name="empAddress" Type="varchar" Mode="In" />
+          <Parameter Name="empPhone" Type="int" Mode="In" />
+          <Parameter Name="depName" Type="varchar" Mode="In" />
+          <Parameter Name="posName" Type="varchar" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EtisalatModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="EtisalatEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="EtisalatModel.Department" />
+          <EntitySet Name="Employees" EntityType="EtisalatModel.Employee" />
+          <EntitySet Name="Postions" EntityType="EtisalatModel.Postion" />
+          <AssociationSet Name="FK__Postion__departm__3C69FB99" Association="EtisalatModel.FK__Postion__departm__3C69FB99">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Postion" EntitySet="Postions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employees__posti__3F466844" Association="EtisalatModel.FK__Employees__posti__3F466844">
+            <End Role="Postion" EntitySet="Postions" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <FunctionImport Name="add_department">
+          <Parameter Name="department_name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="add_employee">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="Int32" />
+            <Parameter Name="position_name" Mode="In" Type="String" />
+            <Parameter Name="depart_name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="add_position">
+            <Parameter Name="position_name" Mode="In" Type="String" />
+            <Parameter Name="department_name" Mode="In" Type="String" />
+            <Parameter Name="salary" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="find_employee" ReturnType="Collection(EtisalatModel.find_employee_Result)">
+          <Parameter Name="employeeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="select_department" ReturnType="Collection(Int32)">
+          <Parameter Name="depart_name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="updateEmployee">
+            <Parameter Name="empName" Mode="In" Type="String" />
+            <Parameter Name="empAddress" Mode="In" Type="String" />
+            <Parameter Name="empPhone" Mode="In" Type="Int32" />
+            <Parameter Name="depName" Mode="In" Type="String" />
+            <Parameter Name="posName" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="department_id" />
+          </Key>
+          <Property Name="department_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="department_name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Postions" Relationship="EtisalatModel.FK__Postion__departm__3C69FB99" FromRole="Department" ToRole="Postion" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="employeeID" />
+          </Key>
+          <Property Name="employeeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="employeeName" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="employeeAddress" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="employeePhone" Type="Int32" />
+          <Property Name="postion_fk" Type="Int32" />
+          <NavigationProperty Name="Postion" Relationship="EtisalatModel.FK__Employees__posti__3F466844" FromRole="Employees" ToRole="Postion" />
+        </EntityType>
+        <EntityType Name="Postion">
+          <Key>
+            <PropertyRef Name="postionID" />
+          </Key>
+          <Property Name="postionID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="postionName" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="department_fk" Type="Int32" />
+          <Property Name="salary" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="EtisalatModel.FK__Postion__departm__3C69FB99" FromRole="Postion" ToRole="Department" />
+          <NavigationProperty Name="Employees" Relationship="EtisalatModel.FK__Employees__posti__3F466844" FromRole="Postion" ToRole="Employees" />
+        </EntityType>
+        <Association Name="FK__Postion__departm__3C69FB99">
+          <End Role="Department" Type="EtisalatModel.Department" Multiplicity="0..1" />
+          <End Role="Postion" Type="EtisalatModel.Postion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="department_id" />
+            </Principal>
+            <Dependent Role="Postion">
+              <PropertyRef Name="department_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employees__posti__3F466844">
+          <End Role="Postion" Type="EtisalatModel.Postion" Multiplicity="0..1" />
+          <End Role="Employees" Type="EtisalatModel.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postion">
+              <PropertyRef Name="postionID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="postion_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="find_employee_Result">
+          <Property Type="String" Name="employeeAddress" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="employeeName" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="employeePhone" Nullable="true" />
+          <Property Type="Int32" Name="salary" Nullable="true" />
+          <Property Type="String" Name="department_name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="postionName" Nullable="true" MaxLength="255" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EtisalatModelStoreContainer" CdmEntityContainer="EtisalatEntities">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="EtisalatModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="department_id" ColumnName="department_id" />
+                <ScalarProperty Name="department_name" ColumnName="department_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="EtisalatModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="employeeName" ColumnName="employeeName" />
+                <ScalarProperty Name="employeeAddress" ColumnName="employeeAddress" />
+                <ScalarProperty Name="employeePhone" ColumnName="employeePhone" />
+                <ScalarProperty Name="postion_fk" ColumnName="postion_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Postions">
+            <EntityTypeMapping TypeName="EtisalatModel.Postion">
+              <MappingFragment StoreEntitySet="Postion">
+                <ScalarProperty Name="postionID" ColumnName="postionID" />
+                <ScalarProperty Name="postionName" ColumnName="postionName" />
+                <ScalarProperty Name="department_fk" ColumnName="department_fk" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="add_department" FunctionName="EtisalatModel.Store.add_department" />
+          <FunctionImportMapping FunctionImportName="add_employee" FunctionName="EtisalatModel.Store.add_employee" />
+          <FunctionImportMapping FunctionImportName="add_position" FunctionName="EtisalatModel.Store.add_position" />
+          <FunctionImportMapping FunctionImportName="find_employee" FunctionName="EtisalatModel.Store.find_employee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EtisalatModel.find_employee_Result">
+                <ScalarProperty Name="employeeAddress" ColumnName="employeeAddress" />
+                <ScalarProperty Name="employeeName" ColumnName="employeeName" />
+                <ScalarProperty Name="employeePhone" ColumnName="employeePhone" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="department_name" ColumnName="department_name" />
+                <ScalarProperty Name="postionName" ColumnName="postionName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="select_department" FunctionName="EtisalatModel.Store.select_department" />
+          <FunctionImportMapping FunctionImportName="updateEmployee" FunctionName="EtisalatModel.Store.updateEmployee" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
