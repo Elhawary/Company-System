@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EtisalatModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="EtisalatEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Departments" EntityType="EtisalatModel.Department" />
+    <EntitySet Name="Employees" EntityType="EtisalatModel.Employee" />
+    <EntitySet Name="Postions" EntityType="EtisalatModel.Postion" />
+    <AssociationSet Name="FK__Postion__departm__3C69FB99" Association="EtisalatModel.FK__Postion__departm__3C69FB99">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Postion" EntitySet="Postions" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employees__posti__3F466844" Association="EtisalatModel.FK__Employees__posti__3F466844">
+      <End Role="Postion" EntitySet="Postions" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <FunctionImport Name="add_department">
+      <Parameter Name="department_name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="add_employee">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="address" Mode="In" Type="String" />
+      <Parameter Name="phone" Mode="In" Type="Int32" />
+      <Parameter Name="position_name" Mode="In" Type="String" />
+      <Parameter Name="depart_name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="add_position">
+      <Parameter Name="position_name" Mode="In" Type="String" />
+      <Parameter Name="department_name" Mode="In" Type="String" />
+      <Parameter Name="salary" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="find_employee" ReturnType="Collection(EtisalatModel.find_employee_Result)">
+      <Parameter Name="employeeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="select_department" ReturnType="Collection(Int32)">
+      <Parameter Name="depart_name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="updateEmployee">
+      <Parameter Name="empName" Mode="In" Type="String" />
+      <Parameter Name="empAddress" Mode="In" Type="String" />
+      <Parameter Name="empPhone" Mode="In" Type="Int32" />
+      <Parameter Name="depName" Mode="In" Type="String" />
+      <Parameter Name="posName" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="department_id" />
+    </Key>
+    <Property Name="department_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="department_name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Postions" Relationship="EtisalatModel.FK__Postion__departm__3C69FB99" FromRole="Department" ToRole="Postion" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="employeeID" />
+    </Key>
+    <Property Name="employeeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="employeeName" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="employeeAddress" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="employeePhone" Type="Int32" />
+    <Property Name="postion_fk" Type="Int32" />
+    <NavigationProperty Name="Postion" Relationship="EtisalatModel.FK__Employees__posti__3F466844" FromRole="Employees" ToRole="Postion" />
+  </EntityType>
+  <EntityType Name="Postion">
+    <Key>
+      <PropertyRef Name="postionID" />
+    </Key>
+    <Property Name="postionID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="postionName" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="department_fk" Type="Int32" />
+    <Property Name="salary" Type="Int32" />
+    <NavigationProperty Name="Department" Relationship="EtisalatModel.FK__Postion__departm__3C69FB99" FromRole="Postion" ToRole="Department" />
+    <NavigationProperty Name="Employees" Relationship="EtisalatModel.FK__Employees__posti__3F466844" FromRole="Postion" ToRole="Employees" />
+  </EntityType>
+  <Association Name="FK__Postion__departm__3C69FB99">
+    <End Role="Department" Type="EtisalatModel.Department" Multiplicity="0..1" />
+    <End Role="Postion" Type="EtisalatModel.Postion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="Postion">
+        <PropertyRef Name="department_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employees__posti__3F466844">
+    <End Role="Postion" Type="EtisalatModel.Postion" Multiplicity="0..1" />
+    <End Role="Employees" Type="EtisalatModel.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Postion">
+        <PropertyRef Name="postionID" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="postion_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="find_employee_Result">
+    <Property Type="String" Name="employeeAddress" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="employeeName" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="employeePhone" Nullable="true" />
+    <Property Type="Int32" Name="salary" Nullable="true" />
+    <Property Type="String" Name="department_name" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="postionName" Nullable="true" MaxLength="255" />
+  </ComplexType>
+</Schema>

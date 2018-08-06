@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EtisalatModelStoreContainer" CdmEntityContainer="EtisalatEntities">
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="EtisalatModel.Department">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="department_name" ColumnName="department_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="EtisalatModel.Employee">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+          <ScalarProperty Name="employeeName" ColumnName="employeeName" />
+          <ScalarProperty Name="employeeAddress" ColumnName="employeeAddress" />
+          <ScalarProperty Name="employeePhone" ColumnName="employeePhone" />
+          <ScalarProperty Name="postion_fk" ColumnName="postion_fk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Postions">
+      <EntityTypeMapping TypeName="EtisalatModel.Postion">
+        <MappingFragment StoreEntitySet="Postion">
+          <ScalarProperty Name="postionID" ColumnName="postionID" />
+          <ScalarProperty Name="postionName" ColumnName="postionName" />
+          <ScalarProperty Name="department_fk" ColumnName="department_fk" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="add_department" FunctionName="EtisalatModel.Store.add_department" />
+    <FunctionImportMapping FunctionImportName="add_employee" FunctionName="EtisalatModel.Store.add_employee" />
+    <FunctionImportMapping FunctionImportName="add_position" FunctionName="EtisalatModel.Store.add_position" />
+    <FunctionImportMapping FunctionImportName="find_employee" FunctionName="EtisalatModel.Store.find_employee">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EtisalatModel.find_employee_Result">
+          <ScalarProperty Name="employeeAddress" ColumnName="employeeAddress" />
+          <ScalarProperty Name="employeeName" ColumnName="employeeName" />
+          <ScalarProperty Name="employeePhone" ColumnName="employeePhone" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+          <ScalarProperty Name="department_name" ColumnName="department_name" />
+          <ScalarProperty Name="postionName" ColumnName="postionName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="select_department" FunctionName="EtisalatModel.Store.select_department" />
+    <FunctionImportMapping FunctionImportName="updateEmployee" FunctionName="EtisalatModel.Store.updateEmployee" />
+  </EntityContainerMapping>
+</Mapping>

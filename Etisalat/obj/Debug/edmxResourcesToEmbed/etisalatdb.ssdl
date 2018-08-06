@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EtisalatModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EtisalatModelStoreContainer">
+    <EntitySet Name="Department" EntityType="EtisalatModel.Store.Department" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employees" EntityType="EtisalatModel.Store.Employees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Postion" EntityType="EtisalatModel.Store.Postion" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__Employees__posti__3F466844" Association="EtisalatModel.Store.FK__Employees__posti__3F466844">
+      <End Role="Postion" EntitySet="Postion" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Postion__departm__3C69FB99" Association="EtisalatModel.Store.FK__Postion__departm__3C69FB99">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Postion" EntitySet="Postion" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="department_id" />
+    </Key>
+    <Property Name="department_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="department_name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="employeeID" />
+    </Key>
+    <Property Name="employeeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="employeeName" Type="varchar" MaxLength="255" />
+    <Property Name="employeeAddress" Type="varchar" MaxLength="255" />
+    <Property Name="employeePhone" Type="int" />
+    <Property Name="postion_fk" Type="int" />
+  </EntityType>
+  <EntityType Name="Postion">
+    <Key>
+      <PropertyRef Name="postionID" />
+    </Key>
+    <Property Name="postionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="postionName" Type="varchar" MaxLength="255" />
+    <Property Name="department_fk" Type="int" />
+    <Property Name="salary" Type="int" />
+  </EntityType>
+  <Association Name="FK__Employees__posti__3F466844">
+    <End Role="Postion" Type="EtisalatModel.Store.Postion" Multiplicity="0..1" />
+    <End Role="Employees" Type="EtisalatModel.Store.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Postion">
+        <PropertyRef Name="postionID" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="postion_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Postion__departm__3C69FB99">
+    <End Role="Department" Type="EtisalatModel.Store.Department" Multiplicity="0..1" />
+    <End Role="Postion" Type="EtisalatModel.Store.Postion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="department_id" />
+      </Principal>
+      <Dependent Role="Postion">
+        <PropertyRef Name="department_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="add_department" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="department_name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="add_employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="address" Type="varchar" Mode="In" />
+    <Parameter Name="phone" Type="int" Mode="In" />
+    <Parameter Name="position_name" Type="varchar" Mode="In" />
+    <Parameter Name="depart_name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="add_position" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="position_name" Type="varchar" Mode="In" />
+    <Parameter Name="department_name" Type="varchar" Mode="In" />
+    <Parameter Name="salary" Type="int" Mode="In" />
+  </Function>
+  <Function Name="find_employee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="employeeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="select_department" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="depart_name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="updateEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="empName" Type="varchar" Mode="In" />
+    <Parameter Name="empAddress" Type="varchar" Mode="In" />
+    <Parameter Name="empPhone" Type="int" Mode="In" />
+    <Parameter Name="depName" Type="varchar" Mode="In" />
+    <Parameter Name="posName" Type="varchar" Mode="In" />
+  </Function>
+</Schema>
